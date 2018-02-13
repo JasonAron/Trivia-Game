@@ -1,0 +1,21 @@
+body {
+  background-color: #191E19; 
+}
+/*MP4 Background*/
+#video-container {
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
+  clear: both;
+}
+
+
+video {
+  width: 100%;
+  max-width: 980px;
+  position: absolute;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  
+}
