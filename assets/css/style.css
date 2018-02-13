@@ -1,6 +1,16 @@
 body {
   background-color: #191E19; 
 }
+
+/*Animations*/
+#blink_me {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
 /*MP4 Background*/
 #video-container {
   width: 100%;
@@ -26,12 +36,95 @@ video {
   padding-top: 50px;
 }
 
+.wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  clear: both;
+}
 
-h1, h2, h3, p {
+.container {
+    text-align: center;
+}
+
+h1 {
     color: #ffffff;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Kaushan Script', sans-serif;
+    font-weight: 100;
+    text-transform: uppercase;
+    margin:5px 0;
+    text-align: center;
+
+}
+
+h3, p {
+    color: #ffffff;
+    font-family: 'Kaushan Script', sans-serif;
     font-weight: 100;
     text-transform: uppercase;
     margin:5px 0;
     text-align: center;
 }
+
+button:hover {
+  background: transparent;
+  border: solid 3px #ffffff;
+  color: #ffffff;
+  cursor:pointer;
+  font-size:1.2em;
+  padding:18px 10px;
+  width:180px;
+  margin: 10px;
+  outline: none; 
+  animation: none !important;
+}
+
+button{
+  background: transparent;
+  border: solid 3px #191E19;
+  color: #191E19;
+  cursor:pointer;
+  font-size:1.2em;
+  padding:18px 10px;
+  width:180px;
+  margin: 10px;
+  outline: none;
+}
+
+};
+
+
+/*--------Media Queries--------*/
+
+/*--------980--------*/
+@media only screen and (max-width: 980px) {
+
+ #video-container {
+    max-width: 980px;
+    width: 100%;
+    position: absolute;
+
+  }
+};
+
+
+
+/*-------768--------*/
+@media only screen and (max-width: 768px) {
+  #video-container {
+    max-width: 768px;
+    width: 100%;
+    position: absolute;
+
+  }
+};
+
+@media only screen and (max-width: 640px) {
+  #video-container {
+    max-width: 640px;
+    width: 100%;
+    position: absolute;
+
+  }
+};
+
