@@ -66,8 +66,21 @@ h3, p {
     text-align: center;
 }
 
+button:before{
+ content: “ ”;
+ background: inherit; 
+ position: absolute;
+ left: 0;
+ right: 0;
+ top: 0; 
+ bottom: 0;
+ box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
+ filter: blur(10px);
+}
+
 button:hover {
   background: transparent;
+  border-radius: 25px;
   border: solid 3px #ffffff;
   color: #ffffff;
   cursor:pointer;
@@ -76,11 +89,13 @@ button:hover {
   width:180px;
   margin: 10px;
   outline: none; 
+  overflow: hidden;
   animation: none !important;
 }
 
 button{
   background: transparent;
+  border-radius: 25px;
   border: solid 3px #191E19;
   color: #191E19;
   cursor:pointer;
@@ -88,10 +103,50 @@ button{
   padding:18px 10px;
   width:180px;
   margin: 10px;
+  overflow: hidden;
   outline: none;
 }
 
-};
+
+#overlay {
+  width: 550px;
+  height: 620px;
+  background: #191E19;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -270px;
+  margin-top: -250px;
+  border-radius: 25px;
+  opacity: .8;
+  padding: 25px;
+}
+
+.questions {
+  font-size: 24px;
+  font-family: 'Helvetica', serif;
+  font-weight: 100;
+  color: #ffffff;
+}
+
+.answers {
+  padding-top: 75px;
+}
+
+.answer {
+  font-size: 24px;
+  font-family: 'Helvetica', serif;
+  font-weight: 100;
+  color: #ffffff;  
+}
+
+.answer:hover {
+  font-size: 24px;
+  font-family: 'Helvetica', serif;
+  font-weight: 100;
+  color: #191E19;
+  background: #ffffff;
+}
 
 
 /*--------Media Queries--------*/
