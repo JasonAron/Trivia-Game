@@ -53,6 +53,7 @@
 //-------- Go!!! 2(^_^2) --------
 //===============================
 
+
 var startScreen
 var counter = 25;
 var questionArray = [""]
@@ -62,6 +63,64 @@ var correctTotal = 0;
 var incorrectTotal = 0;
 var unansweredTotal = 0;
 
+let state = {
+	myQuestions: [
+		{
+			question: "Which of the following groups is disappearing the fastest?",
+			answers:[
+				 "Land species",
+				 "Sea species",
+				 "Fresh water",
+			],
+			correctAnswer: "c"
+		},
+
+		{
+			question: "How many people could we feed with the grain we use for the cattle industry?",
+			answers: [
+				 "Land species",
+				 "Sea species",
+				 "Fresh water",
+			],
+			correctAnswer: "c"
+		},
+	],
+	questionCounter: 0
+} 
+
+
+
+function startGame() {
+	$("#overlay").removeClass("hidden");
+	$(".startBtn").addClass("hidden");
+	generateQuestions();
+
+};
+
+function generateQuestions() {
+	var currentQuestion = state.myQuestions[state.questionCounter]
+	$(".question").html(currentQuestion.question)
+	for (let i = 0; i < currentQuestion.answers.length; i++) {
+		$(".answers").append("<button class='answer' >" + currentQuestion.answers[i] + "</button>"); 		
+	}
+};
+
+$(".startBtn").on("click", function() {
+	startGame()
+
+});
+
+
+
+
+
+
+
+// function gameLoad() {
+// 	$("#overlay").hide();	
+// }
+
+// gameLoad();
 
 
 

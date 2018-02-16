@@ -107,6 +107,9 @@ button{
   outline: none;
 }
 
+.hidden {
+  display: none;
+}
 
 #overlay {
   width: 550px;
@@ -122,7 +125,7 @@ button{
   padding: 25px;
 }
 
-.questions {
+.question {
   font-size: 24px;
   font-family: 'Helvetica', serif;
   font-weight: 100;

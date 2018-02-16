@@ -19,8 +19,9 @@
 			<source src="assets/images/Landscape.mp4" type="video/mp4">
 			</video>
 		</div>
-
+<!-- ===== -->
 <!-- Audio -->
+<!-- ===== -->
 	<audio id="myaudio" preload="auto" autoplay="true" loop>
   		<source src="assets/04NotestoYou.m4a" type="audio/mp4">
   		</audio>
@@ -37,27 +38,26 @@
 	<div class="wrapper container" id="main-container">
 			<section class="main-section">
 
-				<button id="blink_me">START</button>
+				<button class="startBtn" id="blink_me">START</button>
 						 
 			</section>
 	</div> <!--Main Container Wrapper-->
-	
-	<!-- Q&A Container -->
-<!-- 	<div id="overlay">
-		<span class="questions">Which of the following groups is disappearing the fastest?</span>
+
+<!-- ============  -->
+<!-- Q&A Container -->
+<!-- ============  -->
+	<div class="hidden" id="overlay">
+		<div class="question"></div>
 		 <br>
 		 <br>
 		<div class="answers">
-			<button class="answer" id="a">A.</button>
-			<br>
-			<button class="answer" id="b">B.</button>
-			<br>
-			<button class="answer" id="c">C.</button>
-			<br>
-			<button class="answer" id="d">D.</button>
 		</div>	
-	</div> -->
-		
-<script src="assets/javascript/app.js"></script>
+	</div>
+	
+	<script
+  		src="http://code.jquery.com/jquery-3.3.1.min.js"
+  		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  		crossorigin="anonymous"></script>
+	<script src="assets/javascript/app.js"></script>
 </body>
 </html>
