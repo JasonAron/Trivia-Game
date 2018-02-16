@@ -11,49 +11,54 @@
 </head>
 <body>
 
-<!-- ======== -->
-<!-- Video BG -->
-<!-- ======== -->
+	<!-- ======== -->
+	<!-- Video BG -->
+	<!-- ======== -->
 	<div id="video-container">
 		<video preload="auto" autoplay="true" loop>
 			<source src="assets/images/Landscape.mp4" type="video/mp4">
 			</video>
 		</div>
-<!-- ===== -->
-<!-- Audio -->
-<!-- ===== -->
+	<!-- ===== -->
+	<!-- Audio -->
+	<!-- ===== -->
 	<audio id="myaudio" preload="auto" autoplay="true" loop>
   		<source src="assets/04NotestoYou.m4a" type="audio/mp4">
   		</audio>
-	
 
+	<!-- ====== -->
+	<!-- Header -->
+	<!-- ====== -->
 	<header id="masthead">
 		<h1>Trivia</h1>
-		<h3>In the night of wilderness</h3>
+		<h2>In the night of wilderness</h2>
 	</header>
 
-<!-- ============== -->
-<!-- Main Container -->
-<!-- ============== -->
+	<!-- ============== -->
+	<!-- Main Container -->
+	<!-- ============== -->
 	<div class="wrapper container" id="main-container">
-			<section class="main-section">
+		<section class="main-section">
+			<!-- Start Button -->
+			<button class="startBtn" id="blink_me">START</button>					 
+		</section>
 
-				<button class="startBtn" id="blink_me">START</button>
-						 
-			</section>
+		<!-- ============  -->
+		<!-- Q&A Container -->
+		<!-- ============  -->
+		<div class="hidden" id="overlay">
+			<!-- Timer -->
+			<span id="countdowntimer">25</span>
+			<br>
+			<br>
+			<!-- Questions -->
+			<div class="question"></div>
+			<br>
+			<!-- Answers -->
+			<div class="answers">
+			</div>	
+		</div>
 	</div> <!--Main Container Wrapper-->
-
-<!-- ============  -->
-<!-- Q&A Container -->
-<!-- ============  -->
-	<div class="hidden" id="overlay">
-		<div class="question"></div>
-		 <br>
-		 <br>
-		<div class="answers">
-		</div>	
-	</div>
-	
 	<script
   		src="http://code.jquery.com/jquery-3.3.1.min.js"
   		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
