@@ -135,7 +135,7 @@ let state = {
 			correctAnswer: [3]
 		},
 	],
-	questionCounter: 0
+	questionCounter: 3
 }; 
 
 
@@ -163,11 +163,11 @@ function generateQuestions() {
 	for (let i = 0; i < currentQuestion.answers.length; i++) {
 		$(".answers").append("<button class='answer'>" + currentQuestion.answers[i] + "</button>" + "<br>");		
 	}
-	startTimer()
+	startTimer();
 };
 
 $(".startBtn").on("click", function() {
-	startGame()
+	startGame();
 
 });
 
