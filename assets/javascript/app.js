@@ -132,7 +132,7 @@ var	myQuestions = [
 var correctTotal = 0;
 var incorrectTotal = 0;
 var unansweredTotal = 0;
-var timeLeft = 25;
+var timeleft = 25;
 var createTimer;
 var questionCounter = 0;
 
@@ -150,16 +150,14 @@ function startGame() {
 // ---- Timer ----
 // ===============
 function startTimer() {
-	var timeLeft = 25;
+	var timeleft = 25;
 	createTimer = setInterval(function(){
-		timeLeft--;
-		document.getElementById("countdowntimer").textContent = timeLeft;
-		
-		if(timeLeft === 0) {
+		timeleft--;
+		document.getElementById("countdowntimer").textContent = timeleft;
+		if(timeleft <= 0) {
     		clearInterval(createTimer);
-    		unansweredTotal++;
-    	}
-	}, 1000);
+		}
+	},1000);
 };
 
 // ============================
@@ -198,10 +196,13 @@ function increaseUnansweredTotal() {
 function incrementQuestionCounter(){
 	questionCounter++;
 	generateQuestions()
-};
+}
 
+// ==========================
+// ---- Player's Guess ----
+// ==========================
+function checkCorrectIncorrect() {	
 
-function checkCorrectIncorrect() {
 	if (myQuestions.answers === myQuestions.correctAnswer) {
 		increaseCorrectTotal();
 	} else {
@@ -211,30 +212,18 @@ function checkCorrectIncorrect() {
 };
 
 
-
-// ==========================
-// ---- Player's Guess ----
-// ==========================
-// function correctGuess() {
-	
-// };
-
-
-// function correctGuess() {
-
-// };
-
-
 // =========================
 // ---- Event Listeners ----
 // =========================
-$(".answers").on("click", ".answer", function(event) {
-	clearInterval(createTimer);
+$(".answers").on("click", ".answer", function() {
 	checkCorrectIncorrect();
 	$(".answers").empty();
-	generateQuestions()
-	
+	clearInterval(createTimer);
+	incrementQuestionCounter();
+	$(this).attr("answer");
+
 });
+
 
 
 $(".startBtn").on("click", function() {
