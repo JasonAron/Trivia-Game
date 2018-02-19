@@ -54,18 +54,11 @@
 //===============================
 
 
-var questionArray = [""]
-var answerArray = [[""]]
-var correctAnswers = [""]
-var correctTotal = 0;
-var incorrectTotal = 0;
-var unansweredTotal = 0;
-
 //====================
 // ---- Questions ----
 //====================
-let state = {
-	myQuestions: [
+
+var	myQuestions = [
 		{
 			question: "Which of the following groups is disappearing the fastest?",
 			answers:[
@@ -73,7 +66,7 @@ let state = {
 				 "Sea Species",
 				 "Fresh Water Species",
 			],
-			correctAnswer: [2]
+			correctAnswer: 2
 		},
 
 		{
@@ -84,7 +77,7 @@ let state = {
 				 "2 Billion",
 				 "9 Billion"
 			],
-			correctAnswer: [3]
+			correctAnswer: 3
 		},
 		{
 			question: "What is the number one driving force behind deforestation?",
@@ -93,7 +86,7 @@ let state = {
 				 "Palm Oil",
 				 "Cattle and pasture",
 			],
-			correctAnswer: [2]
+			correctAnswer: 2
 		},
 		{
 			question: "Which of these industry giants uses more water?",
@@ -102,7 +95,7 @@ let state = {
 				 "Animal Agriculture",
 				 "Fracking",
 			],
-			correctAnswer: [1]
+			correctAnswer: 1
 		},
 		{
 			question: "What mass extinction did our planet just enter?",
@@ -112,7 +105,7 @@ let state = {
 				 "5th",
 				 "6th"
 			],
-			correctAnswer: [3]
+			correctAnswer: 3
 		},	
 		{
 			question: "How many toxins are regularly found in your drinking water?",
@@ -122,7 +115,7 @@ let state = {
 				 "8",
 				 "12"
 			],
-			correctAnswer: [3]
+			correctAnswer: 3
 		},
 		{
 			question: "How much of the world's wealth do the riches 1% own?",
@@ -132,14 +125,20 @@ let state = {
 				 "40%",
 				 "50%"
 			],
-			correctAnswer: [3]
+			correctAnswer: 3
 		},
-	],
-	questionCounter: 3
-}; 
+	];
+ 
+var correctTotal = 0;
+var incorrectTotal = 0;
+var unansweredTotal = 0;
+var timeLeft = 25;
+var createTimer;
+var questionCounter = 0;
 
-
-
+// ====================
+// ---- Game Start ----
+// ====================
 function startGame() {
 	$("#overlay").removeClass("hidden");
 	$(".startBtn").addClass("hidden");
@@ -147,41 +146,104 @@ function startGame() {
 
 };
 
+// ===============
+// ---- Timer ----
+// ===============
 function startTimer() {
-	var timeleft = 25;
-	var createTimer = setInterval(function(){
-	timeleft--;
-	document.getElementById("countdowntimer").textContent = timeleft;
-	if(timeleft <= 0)
-    	clearInterval(createTimer);
-	},1000);
+	var timeLeft = 25;
+	createTimer = setInterval(function(){
+		timeLeft--;
+		document.getElementById("countdowntimer").textContent = timeLeft;
+		
+		if(timeLeft === 0) {
+    		clearInterval(createTimer);
+    		unansweredTotal++;
+    	}
+	}, 1000);
 };
 
+// ============================
+// ---- Generate Questions ----
+// ============================
 function generateQuestions() {
-	var currentQuestion = state.myQuestions[state.questionCounter]
+	var currentQuestion = myQuestions[questionCounter]
 	$(".question").html(currentQuestion.question)
 	for (let i = 0; i < currentQuestion.answers.length; i++) {
-		$(".answers").append("<button class='answer'>" + currentQuestion.answers[i] + "</button>" + "<br>");		
+		var answer = $("<button>").attr("class", "answer");
+		answer.attr("answer", i);
+		answer.text(currentQuestion.answers[i]);
+		$(".answers").append(answer);		
 	}
 	startTimer();
 };
 
+
+// ==========================
+// ---- Increment Totals ----
+// ==========================
+function increaseCorrectTotal() {
+	correctTotal++;
+};
+
+
+function increaseIncorrectTotal() {
+	incorrectTotal++;
+};
+
+
+function increaseUnansweredTotal() {
+	unansweredTotal++;
+};
+
+function incrementQuestionCounter(){
+	questionCounter++;
+	generateQuestions()
+};
+
+
+function checkCorrectIncorrect() {
+	if (myQuestions.answers === myQuestions.correctAnswer) {
+		increaseCorrectTotal();
+	} else {
+		increaseIncorrectTotal();
+	}
+	incrementQuestionCounter();
+};
+
+
+
+// ==========================
+// ---- Player's Guess ----
+// ==========================
+// function correctGuess() {
+	
+// };
+
+
+// function correctGuess() {
+
+// };
+
+
+// =========================
+// ---- Event Listeners ----
+// =========================
+$(".answers").on("click", ".answer", function(event) {
+	clearInterval(createTimer);
+	checkCorrectIncorrect();
+	$(".answers").empty();
+	generateQuestions()
+	
+});
+
+
 $(".startBtn").on("click", function() {
 	startGame();
-
 });
 
 
 
 
-
-
-
-// function gameLoad() {
-// 	$("#overlay").hide();	
-// }
-
-// gameLoad();
 
 
 
