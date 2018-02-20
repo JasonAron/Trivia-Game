@@ -57,7 +57,6 @@
 //====================
 // ---- Questions ----
 //====================
-
 var	myQuestions = [
 		{
 			question: "Which of the following groups is disappearing the fastest?",
@@ -129,6 +128,9 @@ var	myQuestions = [
 		},
 	];
  
+// ==========================
+// ---- Global Variables ----
+// ==========================
 var correctTotal = 0;
 var incorrectTotal = 0;
 var unansweredTotal = 0;
@@ -143,7 +145,6 @@ function startGame() {
 	$("#overlay").removeClass("hidden");
 	$(".startBtn").addClass("hidden");
 	generateQuestions();
-
 };
 
 // ===============
@@ -154,7 +155,7 @@ function startTimer() {
 	createTimer = setInterval(function(){
 		timeleft--;
 		document.getElementById("countdowntimer").textContent = timeleft;
-		if(timeleft <= 0) {
+		if(timeleft === 0) {
     		clearInterval(createTimer);
 		}
 	},1000);
@@ -172,6 +173,7 @@ function generateQuestions() {
 		answer.text(currentQuestion.answers[i]);
 		$(".answers").append(answer);		
 	}
+	clearInterval(createTimer);
 	startTimer();
 };
 
@@ -195,20 +197,27 @@ function increaseUnansweredTotal() {
 
 function incrementQuestionCounter(){
 	questionCounter++;
-	generateQuestions()
-}
+	if (questionCounter >= myQuestions.length) {
+			// End game 
+	} else {
+		generateQuestions()
+	}
+};
+
 
 // ==========================
 // ---- Player's Guess ----
 // ==========================
-function checkCorrectIncorrect() {	
-
-	if (myQuestions.answers === myQuestions.correctAnswer) {
+function checkCorrectIncorrect(value) {	
+	console.log(value);
+	console.log(myQuestions[questionCounter].correctAnswer);
+	if (value == myQuestions[questionCounter].correctAnswer) {
+		console.log("correctAnswer")
 		increaseCorrectTotal();
 	} else {
+		console.log("incorrectTotal", incorrectTotal);
 		increaseIncorrectTotal();
 	}
-	incrementQuestionCounter();
 };
 
 
@@ -216,15 +225,11 @@ function checkCorrectIncorrect() {
 // ---- Event Listeners ----
 // =========================
 $(".answers").on("click", ".answer", function() {
-	checkCorrectIncorrect();
-	$(".answers").empty();
 	clearInterval(createTimer);
+	checkCorrectIncorrect($(this).attr("answer"));
+	$(".answers").empty();
 	incrementQuestionCounter();
-	$(this).attr("answer");
-
 });
-
-
 
 $(".startBtn").on("click", function() {
 	startGame();
