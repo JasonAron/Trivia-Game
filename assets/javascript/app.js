@@ -111,6 +111,24 @@ var	myQuestions = [
 			],
 			correctAnswer: "50%"
 		},
+		{
+			question: "Fukushima Daichi as of 2018 is at its highest radiation level since 2011.",
+			answers: [
+				 "True",
+				 "False",
+			],
+			correctAnswer: "True"
+		},
+		{
+			question: "What Country has the largest prison population?",
+			answers: [
+				 "China",
+				 "United States",
+				 "North Korea",
+				 "Canada",
+			],
+			correctAnswer: "United States"
+		},
 	];
  
 // ==========================
@@ -123,7 +141,7 @@ var questionCounter = 0;
 var questionTimeLeft;
 var questionTranisitionTime;
 var createTimer;
-
+$("#myaudio").prop("volume", 0.5);
 
 // ==========================
 // ---- Game Start & End ----
@@ -154,7 +172,7 @@ function resetGame(){
 // ---- Timers ----
 // ================
 function startQuestionTimer() {
-	var timeleft = 25;
+	var timeleft = 20;
 	document.getElementById("countdowntimer").textContent = timeleft;
 	createTimer = setInterval(function(){
 		timeleft--;

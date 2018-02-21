@@ -67,7 +67,7 @@ h2 {
     text-align: center;
 }
 
-button:before{
+/*button:before{
  content: “ ”;
  background: inherit; 
  position: absolute;
@@ -77,7 +77,7 @@ button:before{
  bottom: 0;
  box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
  filter: blur(10px);
-}
+}*/
 
 button:hover {
   background: transparent;
@@ -88,7 +88,7 @@ button:hover {
   font-size:1.2em;
   padding:18px 10px;
   width:180px;
-  margin: 10px;
+ /* margin: 10px;*/
   outline: none; 
   overflow: hidden;
   animation: none !important;
@@ -163,6 +163,7 @@ button {
   font-weight: 100;
   color: #ffffff; 
   width: auto; 
+  display: block;
 }
 
 .answer:hover {
