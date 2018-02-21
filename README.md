@@ -18,19 +18,8 @@ Click [here](https://jasonaron.github.io/Trivia-Game/) to see the live game.
   1. Media query breakpoint @ 980px | 768px | 640px.
   1. CSS Key frame animation.
 
-
-* JavaScript:
-
-  * Create a classic Hangman game using Javascript.
-
-  * Create a wordbank that is randomly drawn from.
-
-  * Display correct letters as the user guesses them.
-
-  * Display incorrect letters to an already guessed section.
-
-  * Display win count, loss count, and new word at the end of each game.
+* JavaScript
  
- * JQuery
+* JQuery
  
 
