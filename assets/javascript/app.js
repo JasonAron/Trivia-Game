@@ -125,7 +125,6 @@ var questionTranisitionTime;
 var createTimer;
 
 
-
 // ==========================
 // ---- Game Start & End ----
 // ==========================
@@ -140,23 +139,22 @@ function endGame() {
 	$("#countdowntimer").empty();
 	$(".question").html("Correct Answers: " + correctTotal + "<br>" + "Wrong Answers: " + incorrectTotal + "<br>" + "Unanswered Questions: " + unansweredTotal + "<br>" + '<img src="assets/images/correctAnswer.gif">');
 	$(".resetBtn").removeClass("hidden");
-	
-	$(".resetBtn").on("click", function() {
-		var correctTotal = 0;
-		var incorrectTotal = 0;
-		var unansweredTotal = 0;
-		var questionCounter = 0;
-	generateQuestions();
-	});
-startGame();
 };
 
+function resetGame(){
+	$(".resetBtn").addClass("hidden");
+	correctTotal = 0;
+	incorrectTotal = 0;
+	unansweredTotal = 0;
+	questionCounter = 0;
+	startGame();
+};
 
 // ================
 // ---- Timers ----
 // ================
 function startQuestionTimer() {
-	var timeleft = 10;
+	var timeleft = 25;
 	document.getElementById("countdowntimer").textContent = timeleft;
 	createTimer = setInterval(function(){
 		timeleft--;
@@ -170,7 +168,7 @@ function startQuestionTimer() {
 };
 
 function startTransitionTimer() {
-	var timeleft = 1;
+	var timeleft = 5;
 	createTimer = setInterval(function(){
 		timeleft--;
 		if(timeleft === 0) {
@@ -186,7 +184,7 @@ function startTransitionTimer() {
 // ---- Generate Questions ----
 // ============================
 function generateQuestions() {
-	if (questionCounter <= myQuestions.length) {
+	if (questionCounter < myQuestions.length) {
 		var currentQuestion = myQuestions[questionCounter]
 		$(".question").html(currentQuestion.question);
 		for (let i = 0; i < currentQuestion.answers.length; i++) {
@@ -277,6 +275,10 @@ $(".answers").on("click", ".answer", function() {
 
 $(".startBtn").on("click", function() {
 	startGame();
+});
+
+$(".resetBtn").on("click", function() {
+	resetGame();
 });
 
 $(".resetBtn").addClass("hidden");
