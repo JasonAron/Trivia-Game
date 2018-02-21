@@ -51,7 +51,7 @@ var	myQuestions = [
 				 "Sea Species",
 				 "Fresh Water Species",
 			],
-			correctAnswer: 2
+			correctAnswer: "Fresh Water Species"
 		},
 
 		{
@@ -62,7 +62,7 @@ var	myQuestions = [
 				 "2 Billion",
 				 "9 Billion"
 			],
-			correctAnswer: 3
+			correctAnswer: "9 Billion"
 		},
 		{
 			question: "What is the number one driving force behind deforestation?",
@@ -71,7 +71,7 @@ var	myQuestions = [
 				 "Palm Oil",
 				 "Cattle and pasture",
 			],
-			correctAnswer: 2
+			correctAnswer: "Cattle and pasture"
 		},
 		{
 			question: "Which of these industry giants uses more water?",
@@ -80,7 +80,7 @@ var	myQuestions = [
 				 "Animal Agriculture",
 				 "Fracking",
 			],
-			correctAnswer: 1
+			correctAnswer: "Animal Agriculture"
 		},
 		{
 			question: "What mass extinction did our planet just enter?",
@@ -90,7 +90,7 @@ var	myQuestions = [
 				 "5th",
 				 "6th"
 			],
-			correctAnswer: 3
+			correctAnswer: "6th"
 		},	
 		{
 			question: "How many toxins are regularly found in your drinking water?",
@@ -100,7 +100,7 @@ var	myQuestions = [
 				 "8",
 				 "12"
 			],
-			correctAnswer: 3
+			correctAnswer: 12
 		},
 		{
 			question: "How much of the world's wealth do the riches 1% own?",
@@ -110,7 +110,7 @@ var	myQuestions = [
 				 "40%",
 				 "50%"
 			],
-			correctAnswer: 3
+			correctAnswer: "50%"
 		},
 	];
  
@@ -153,7 +153,7 @@ function startQuestionTimer() {
 };
 
 function startTransitionTimer() {
-	var timeleft = 1;
+	var timeleft = 5;
 	createTimer = setInterval(function(){
 		timeleft--;
 		if(timeleft === 0) {
@@ -214,6 +214,7 @@ function gifCorrect() {
 	$(".answers").empty();
 	$(".question").empty();
 	$("#countdowntimer").empty();
+	$(".question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correctAnswer.gif">');
 
 	increaseCorrectTotal();
 };
@@ -222,6 +223,8 @@ function gifIncorrect() {
 	$(".answers").empty();
 	$(".question").empty();
 	$("#countdowntimer").empty();
+	$(".question").html("YOU ARE WRONG!" + "<br>" + "Correct answer is " + myQuestions[questionCounter].correctAnswer
+    + "<br>" + '<img src="assets/images/wrongAnswer.gif">');
 
 	increaseIncorrectTotal();
 };
@@ -230,6 +233,8 @@ function gifUnanswered() {
 	$(".answers").empty();
 	$(".question").empty();
 	$("#countdowntimer").empty();
+	$(".question").html("WHERE YOU GO?" + "<br>" + "Correct answer is " + myQuestions[questionCounter].correctAnswer
+    + "<br>" + '<img src="assets/images/unanswered.gif">');
 
 	increaseUnansweredTotal();
 };
