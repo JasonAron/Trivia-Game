@@ -34,20 +34,6 @@
 		//Incorrect answers
 		//Restart Option (without reloading page)
 
-//===========================
-//-------- Questions --------
-//===========================
-
-//1.Which of the following groups is disappearing the fastes?
-	//Land Species, Sea Species, *Freshwater Species*
-//2. How many people could we feed with the grain we use for the cattle industry?
-	//1 Million, 800 Million, 2 Billion, *9 Billion*
-//3. 
-//4.
-//5. 
-//6. 
-//7. 
-//8. 
 
 //===============================
 //-------- Go!!! 2(^_^2) --------
@@ -134,32 +120,49 @@ var	myQuestions = [
 var correctTotal = 0;
 var incorrectTotal = 0;
 var unansweredTotal = 0;
-var timeleft = 25;
 var createTimer;
 var questionCounter = 0;
+var questionTimeLeft;
+var questionTranisitionTime;
 
-// ====================
-// ---- Game Start ----
-// ====================
+// ==========================
+// ---- Game Start & End ----
+// ==========================
 function startGame() {
 	$("#overlay").removeClass("hidden");
 	$(".startBtn").addClass("hidden");
 	generateQuestions();
 };
 
+
 // ===============
 // ---- Timer ----
 // ===============
-function startTimer() {
-	var timeleft = 25;
+function startQuestionTimer() {
+	var timeleft = 10;
+	document.getElementById("countdowntimer").textContent = timeleft;
 	createTimer = setInterval(function(){
 		timeleft--;
 		document.getElementById("countdowntimer").textContent = timeleft;
 		if(timeleft === 0) {
     		clearInterval(createTimer);
+    		startTransitionTimer();
+    		gifUnanswered();
 		}
 	},1000);
 };
+
+function startTransitionTimer() {
+	var timeleft = 1;
+	createTimer = setInterval(function(){
+		timeleft--;
+		if(timeleft === 0) {
+    		clearInterval(createTimer);
+    		generateQuestions();
+		}
+	},1000);
+};
+
 
 // ============================
 // ---- Generate Questions ----
@@ -174,9 +177,9 @@ function generateQuestions() {
 		$(".answers").append(answer);		
 	}
 	clearInterval(createTimer);
-	startTimer();
+	startQuestionTimer();
+	incrementQuestionCounter();
 };
-
 
 // ==========================
 // ---- Increment Totals ----
@@ -196,29 +199,55 @@ function increaseUnansweredTotal() {
 };
 
 function incrementQuestionCounter(){
-	questionCounter++;
 	if (questionCounter >= myQuestions.length) {
-			// End game 
+		endGame();
 	} else {
-		generateQuestions()
+		questionCounter++;
 	}
 };
 
 
+//===============================
+// ---- Question Transitions ----
+//===============================
+function gifCorrect() {
+	$(".answers").empty();
+	$(".question").empty();
+	$("#countdowntimer").empty();
+
+	increaseCorrectTotal();
+};
+
+function gifIncorrect() {
+	$(".answers").empty();
+	$(".question").empty();
+	$("#countdowntimer").empty();
+
+	increaseIncorrectTotal();
+};
+
+function gifUnanswered() {
+	$(".answers").empty();
+	$(".question").empty();
+	$("#countdowntimer").empty();
+
+	increaseUnansweredTotal();
+};
+
 // ==========================
-// ---- Player's Guess ----
+// ---- Player's Guess ------
 // ==========================
 function checkCorrectIncorrect(value) {	
 	console.log(value);
-	console.log(myQuestions[questionCounter].correctAnswer);
+	// console.log(myQuestions[questionCounter].correctAnswer);
 	if (value == myQuestions[questionCounter].correctAnswer) {
-		console.log("correctAnswer")
-		increaseCorrectTotal();
+		gifCorrect();
 	} else {
-		console.log("incorrectTotal", incorrectTotal);
-		increaseIncorrectTotal();
+		gifIncorrect();
 	}
+	startTransitionTimer();
 };
+
 
 
 // =========================
@@ -227,8 +256,6 @@ function checkCorrectIncorrect(value) {
 $(".answers").on("click", ".answer", function() {
 	clearInterval(createTimer);
 	checkCorrectIncorrect($(this).attr("answer"));
-	$(".answers").empty();
-	incrementQuestionCounter();
 });
 
 $(".startBtn").on("click", function() {
@@ -236,10 +263,74 @@ $(".startBtn").on("click", function() {
 });
 
 
+// ===========================
+// ---- Saved Code Blocks ----
+// ===========================
+
+// if (questionCounter >= myQuestions.length) {
+// 		// End game 
+// } else {
+// 	generateQuestions()
+// }
 
 
+// function generateQuestions() {
+// 	if (questionCounter <= myQuestions.length) {
+// 		var currentQuestion = myQuestions[questionCounter]
+// 		$(".question").html(currentQuestion.question)
+// 		for (let i = 0; i < currentQuestion.answers.length; i++) {
+// 		var answer = $("<button>").attr("class", "answer");
+// 			answer.attr("answer", i);
+// 			answer.text(currentQuestion.answers[i]);
+// 			$(".answers").append(answer);		
+// 		}
+// 		clearInterval(createTimer);
+// 		startQuestionTimer();
+// 		incrementQuestionCounter();
+// 	} else {
+// 		endGame();
+// 	}
+// };
+// function generateQuestions() {
+// 	var currentQuestion = myQuestions[questionCounter]
+// 	$(".question").html(currentQuestion.question)
+// 	for (let i = 0; i < currentQuestion.answers.length; i++) {
+// 		var answer = $("<button>").attr("class", "answer");
+// 		answer.attr("answer", i);
+// 		answer.text(currentQuestion.answers[i]);
+// 		$(".answers").append(answer);		
+// 	}
+// 	clearInterval(createTimer);
+// 	startQuestionTimer();
+// 	incrementQuestionCounter();
+// };
 
 
+// function endStatsDisplay(){ 
+// //     $("#question").html("Correct Answers: " + correctCounter + "<br>" + "Wrong Answers: " + wrongCounter + "<br>"
+// //     + "Unanswered Questions: " + unansweredCounter + "<br>");
+    
+// //     var restart = $("<button>");
+// //     restart.text("RESTART");
+// //     restart.addClass("restartBtn");
+// //     restart.attr("data-name", "restart")
+// //     $("#question").append(restart);
+    
+// //     restart.on("click", function(){
+// //         questionCounter = 0;
+// //         correctTotal = 0;
+// //         incorrectTotal = 0;
+// //         unansweredTotal = 0;
+// //     }
+// // };
 
+
+// function loadStats(){
+// 	if (currentQuestion >= 7) {
+// 		endStatsDisplay();
+// 	} else {
+// 		incrementQuestionCounter();
+// 	}
+// };
 
 
