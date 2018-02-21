@@ -123,7 +123,7 @@ var questionCounter = 0;
 var questionTimeLeft;
 var questionTranisitionTime;
 var createTimer;
-var reset;
+
 
 
 // ==========================
@@ -138,13 +138,13 @@ function startGame() {
 function endGame() {
 	$(".answers").empty();
 	$("#countdowntimer").empty();
-	$("#question").html("Correct Answers: " + correctTotal + "<br>" + "Wrong Answers: " + incorrectTotal + "<br>" + "Unanswered Questions: " + unansweredTotal + "<br>");
+	$(".question").html("Correct Answers: " + correctTotal + "<br>" + "Wrong Answers: " + incorrectTotal + "<br>" + "Unanswered Questions: " + unansweredTotal + "<br>");
 
-	reset = $("<button>");
+	var reset = $("<button>");
+	reset.text("RESET");
 	reset.attr("data-name", "reset");
 	reset.addClass("resetBtn");
-	reset.text("RESET");
-	$("#question").append(reset);
+	$(".question").append(reset);
 
 
 	reset.on("click", function() {
@@ -153,9 +153,11 @@ function endGame() {
 		var unansweredTotal = 0;
 		var questionCounter = 0;
 
-		generateQuestions();
+		generateQuestions(currentQuestion);
 	});
+startGame();
 };
+
 
 // ================
 // ---- Timers ----
@@ -191,18 +193,22 @@ function startTransitionTimer() {
 // ---- Generate Questions ----
 // ============================
 function generateQuestions() {
-	var currentQuestion = myQuestions[questionCounter];
-	$(".question").html(currentQuestion.question);
-	for (let i = 0; i < currentQuestion.answers.length; i++) {
-		var answer = $("<button>").attr("class", "answer");
-		answer.attr("answer", i);
-		answer.text(currentQuestion.answers[i]);
-		$(".answers").append(answer);		
+	if (questionCounter <= myQuestions.length) {
+		var currentQuestion = myQuestions[questionCounter]
+		$(".question").html(currentQuestion.question);
+		for (let i = 0; i < currentQuestion.answers.length; i++) {
+			var answer = $("<button>").attr("class", "answer");
+			answer.attr("answer", i);
+			answer.text(currentQuestion.answers[i]);
+			$(".answers").append(answer);		
+		}
+		clearInterval(createTimer);
+		startQuestionTimer();
+		// incrementQuestionCounter();
+	} else {
+		endGame();
 	}
-	clearInterval(createTimer);
-	startQuestionTimer();
 };
-
 // ==========================
 // ---- Increment Totals ----
 // ==========================
