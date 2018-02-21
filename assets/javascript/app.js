@@ -140,21 +140,21 @@ function endGame() {
 	$("#countdowntimer").empty();
 	$(".question").html("Correct Answers: " + correctTotal + "<br>" + "Wrong Answers: " + incorrectTotal + "<br>" + "Unanswered Questions: " + unansweredTotal + "<br>");
 
-	var reset = $("<button>");
-	reset.text("RESET");
-	reset.attr("data-name", "reset");
-	reset.addClass("resetBtn");
-	$(".question").append(reset);
+	// var reset = $("<button>");
+	// reset.text("RESET");
+	// reset.attr("data-name", "reset");
+	// reset.addClass("resetBtn");
+	// $(".question").append(reset);
 
 
-	reset.on("click", function() {
-		var correctTotal = 0;
-		var incorrectTotal = 0;
-		var unansweredTotal = 0;
-		var questionCounter = 0;
+	// $(".resetBtn").on("click", function() {
+	// 	var correctTotal = 0;
+	// 	var incorrectTotal = 0;
+	// 	var unansweredTotal = 0;
+	// 	var questionCounter = 0;
 
-		generateQuestions(currentQuestion);
-	});
+	// 	generateQuestions();
+	// });
 startGame();
 };
 
@@ -209,6 +209,8 @@ function generateQuestions() {
 		endGame();
 	}
 };
+
+
 // ==========================
 // ---- Increment Totals ----
 // ==========================
