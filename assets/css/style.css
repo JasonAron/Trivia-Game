@@ -108,6 +108,35 @@ button{
   outline: none;
 }
 
+.resetBtn {
+  background: transparent;
+  border-radius: 25px;
+  border: solid 3px #191E19;
+  color: #191E19;
+  cursor:pointer;
+  font-size:1.2em;
+  padding:18px 10px;
+  width:180px;
+  margin: 10px;
+  overflow: hidden;
+  outline: none;
+}
+
+.resetBtn:hover {
+  background: transparent;
+  border-radius: 25px;
+  border: solid 3px #ffffff;
+  color: #ffffff;
+  cursor:pointer;
+  font-size:1.2em;
+  padding:18px 10px;
+  width:180px;
+  margin: 10px;
+  outline: none; 
+  overflow: hidden;
+  animation: none !important;
+}
+
 .hidden {
   display: none;
 }

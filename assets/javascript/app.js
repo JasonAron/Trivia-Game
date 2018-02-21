@@ -226,6 +226,9 @@ function increaseUnansweredTotal() {
 
 function incrementQuestionCounter(){
 	questionCounter++;
+	if (questionCounter >= myQuestions.length) {
+		endGame(); 
+	}
 };
 
 
