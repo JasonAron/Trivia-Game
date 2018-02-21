@@ -39,7 +39,6 @@
 //-------- Go!!! 2(^_^2) --------
 //===============================
 
-
 //====================
 // ---- Questions ----
 //====================
@@ -103,7 +102,7 @@ var	myQuestions = [
 			correctAnswer: 12
 		},
 		{
-			question: "How much of the world's wealth do the riches 1% own?",
+			question: "How much of the world's wealth do the richest 1% own?",
 			answers: [
 				 "20%",
 				 "30%",
@@ -120,10 +119,12 @@ var	myQuestions = [
 var correctTotal = 0;
 var incorrectTotal = 0;
 var unansweredTotal = 0;
-var createTimer;
 var questionCounter = 0;
 var questionTimeLeft;
 var questionTranisitionTime;
+var createTimer;
+var reset;
+
 
 // ==========================
 // ---- Game Start & End ----
@@ -134,10 +135,31 @@ function startGame() {
 	generateQuestions();
 };
 
+function endGame() {
+	$(".answers").empty();
+	$("#countdowntimer").empty();
+	$("#question").html("Correct Answers: " + correctTotal + "<br>" + "Wrong Answers: " + incorrectTotal + "<br>" + "Unanswered Questions: " + unansweredTotal + "<br>");
 
-// ===============
-// ---- Timer ----
-// ===============
+	reset = $("<button>");
+	reset.attr("data-name", "reset");
+	reset.addClass("resetBtn");
+	reset.text("RESET");
+	$("#question").append(reset);
+
+
+	reset.on("click", function() {
+		var correctTotal = 0;
+		var incorrectTotal = 0;
+		var unansweredTotal = 0;
+		var questionCounter = 0;
+
+		generateQuestions();
+	});
+};
+
+// ================
+// ---- Timers ----
+// ================
 function startQuestionTimer() {
 	var timeleft = 10;
 	document.getElementById("countdowntimer").textContent = timeleft;
@@ -153,11 +175,12 @@ function startQuestionTimer() {
 };
 
 function startTransitionTimer() {
-	var timeleft = 5;
+	var timeleft = 1;
 	createTimer = setInterval(function(){
 		timeleft--;
 		if(timeleft === 0) {
     		clearInterval(createTimer);
+    		incrementQuestionCounter();
     		generateQuestions();
 		}
 	},1000);
@@ -168,8 +191,8 @@ function startTransitionTimer() {
 // ---- Generate Questions ----
 // ============================
 function generateQuestions() {
-	var currentQuestion = myQuestions[questionCounter]
-	$(".question").html(currentQuestion.question)
+	var currentQuestion = myQuestions[questionCounter];
+	$(".question").html(currentQuestion.question);
 	for (let i = 0; i < currentQuestion.answers.length; i++) {
 		var answer = $("<button>").attr("class", "answer");
 		answer.attr("answer", i);
@@ -178,7 +201,6 @@ function generateQuestions() {
 	}
 	clearInterval(createTimer);
 	startQuestionTimer();
-	incrementQuestionCounter();
 };
 
 // ==========================
@@ -188,22 +210,16 @@ function increaseCorrectTotal() {
 	correctTotal++;
 };
 
-
 function increaseIncorrectTotal() {
 	incorrectTotal++;
 };
-
 
 function increaseUnansweredTotal() {
 	unansweredTotal++;
 };
 
 function incrementQuestionCounter(){
-	if (questionCounter >= myQuestions.length) {
-		endGame();
-	} else {
-		questionCounter++;
-	}
+	questionCounter++;
 };
 
 
@@ -212,7 +228,6 @@ function incrementQuestionCounter(){
 //===============================
 function gifCorrect() {
 	$(".answers").empty();
-	$(".question").empty();
 	$("#countdowntimer").empty();
 	$(".question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correctAnswer.gif">');
 
@@ -221,7 +236,6 @@ function gifCorrect() {
 
 function gifIncorrect() {
 	$(".answers").empty();
-	$(".question").empty();
 	$("#countdowntimer").empty();
 	$(".question").html("YOU ARE WRONG!" + "<br>" + "Correct answer is " + myQuestions[questionCounter].correctAnswer
     + "<br>" + '<img src="assets/images/wrongAnswer.gif">');
@@ -231,7 +245,6 @@ function gifIncorrect() {
 
 function gifUnanswered() {
 	$(".answers").empty();
-	$(".question").empty();
 	$("#countdowntimer").empty();
 	$(".question").html("WHERE YOU GO?" + "<br>" + "Correct answer is " + myQuestions[questionCounter].correctAnswer
     + "<br>" + '<img src="assets/images/unanswered.gif">');
@@ -239,21 +252,18 @@ function gifUnanswered() {
 	increaseUnansweredTotal();
 };
 
+
 // ==========================
 // ---- Player's Guess ------
 // ==========================
 function checkCorrectIncorrect(value) {	
-	console.log(value);
-	// console.log(myQuestions[questionCounter].correctAnswer);
-	if (value == myQuestions[questionCounter].correctAnswer) {
+	if (myQuestions[questionCounter].answers[value] == myQuestions[questionCounter].correctAnswer) {
 		gifCorrect();
 	} else {
 		gifIncorrect();
 	}
 	startTransitionTimer();
 };
-
-
 
 // =========================
 // ---- Event Listeners ----
@@ -296,6 +306,7 @@ $(".startBtn").on("click", function() {
 // 		endGame();
 // 	}
 // };
+
 // function generateQuestions() {
 // 	var currentQuestion = myQuestions[questionCounter]
 // 	$(".question").html(currentQuestion.question)
@@ -339,3 +350,23 @@ $(".startBtn").on("click", function() {
 // };
 
 
+// function checkCorrectIncorrect(value) {	
+// 	console.log(value);
+// 	// console.log(myQuestions[questionCounter].correctAnswer);
+// 	if (value == myQuestions[questionCounter].correctAnswer) {
+// 		gifCorrect();
+// 	} else {
+// 		gifIncorrect();
+// 	}
+// 	startTransitionTimer();
+// };
+
+
+// function checkCorrectIncorrect(index) {	
+// 	if (myQuestions[questionCounter - 1].answers[index] == myQuestions[questionCounter -1].correctAnswer) {
+// 		gifCorrect();
+// 	} else {
+// 		gifIncorrect();
+// 	}
+// 	startTransitionTimer();
+// };
