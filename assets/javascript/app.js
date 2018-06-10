@@ -141,7 +141,10 @@ var questionCounter = 0;
 var questionTimeLeft;
 var questionTranisitionTime;
 var createTimer;
-$("#myaudio").prop("volume", 0.5);
+
+
+$("#myaudio").prop("volume", 0.1);
+
 
 // ==========================
 // ---- Game Start & End ----
@@ -283,6 +286,7 @@ function checkCorrectIncorrect(value) {
 	startTransitionTimer();
 };
 
+
 // =========================
 // ---- Event Listeners ----
 // =========================
@@ -300,5 +304,7 @@ $(".resetBtn").on("click", function() {
 });
 
 $(".resetBtn").addClass("hidden");
+
+
 
 
